@@ -1,0 +1,180 @@
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  background: var(--grad);
+  display: flex;
+  align-items: center;
+  padding: 90px 5% 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 70% at 80% 30%, rgba(255, 180, 60, 0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 60% at 10% 80%, rgba(0, 180, 220, 0.1) 0%, transparent 60%);
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 180, 60, 0.15);
+  border: 1px solid rgba(255, 180, 60, 0.4);
+  color: var(--gold);
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 1.4rem;
+}
+
+.badge::before {
+  content: '●';
+  font-size: 0.45rem;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* Hero Content */
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 1.2rem;
+}
+
+.hero h1 em {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.9;
+  margin-bottom: 2.2rem;
+  max-width: 460px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* Phone Mockup */
+.hero-phone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-mockup {
+  position: relative;
+}
+
+.phone-frame {
+  width: 260px;
+  height: 500px;
+  background: #001833;
+  border-radius: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+  position: relative;
+  transform: rotate(-4deg);
+}
+
+.phone-frame::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  z-index: 2;
+}
+
+.phone-screen {
+  position: absolute;
+  inset: 7px;
+  border-radius: 34px;
+  overflow: hidden;
+}
+
+.phone-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+/* Floating Cards */
+.float-card {
+  position: absolute;
+  background: #fff;
+  border-radius: 14px;
+  padding: 10px 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-1 {
+  top: 55px;
+  left: -38px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.card-2 {
+  bottom: 70px;
+  right: -48px;
+  animation: float 4s ease-in-out infinite 2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.card-number {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.card-label {
+  font-size: 0.62rem;
+  color: var(--muted);
+}
+
+.card-icon {
+  font-size: 1.3rem;
+}

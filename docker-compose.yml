@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  wazzifni-website-nginx:
+    build: .
+    container_name: wazzifni-website-nginx
+    restart: always
+    networks:
+      - wazzifni-shared
+
+networks:
+  wazzifni-shared:
+    external: true

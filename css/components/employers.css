@@ -1,0 +1,101 @@
+/* Employers Section */
+.employers {
+  background: var(--navy);
+  padding: 80px 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.employers::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 65% 75% at 85% 50%, rgba(0, 135, 198, 0.2) 0%, transparent 65%);
+}
+
+.employers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.employer-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 1.8rem;
+}
+
+.employer-feature {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+
+.employer-feature .feature-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: rgba(0, 135, 198, 0.18);
+  border: 1px solid rgba(0, 135, 198, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.employer-feature .feature-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.employer-feature .feature-description {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.6;
+}
+
+.employers-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.employers-stats .stat-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.3rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: background 0.2s;
+}
+
+.employers-stats .stat-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.stat-number {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.stat-icon {
+  font-size: 1.8rem;
+  margin-right: auto;
+}

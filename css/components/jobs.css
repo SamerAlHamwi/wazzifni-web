@@ -1,0 +1,172 @@
+/* Jobs Section */
+.jobs {
+  background: #fff;
+  padding: 80px 5%;
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.1rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+}
+
+.job-card {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  padding: 1.4rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.job-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(0, 135, 198, 0.12);
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.7rem;
+}
+
+.job-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.job-badge {
+  background: rgba(0, 135, 198, 0.1);
+  color: var(--blue);
+  padding: 0.22rem 0.7rem;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.job-company {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.9rem;
+}
+
+.job-level {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: -8px;
+  margin-bottom: 0.9rem;
+}
+
+.job-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.job-location {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.job-salary {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--orange);
+}
+
+.job-date {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.jobs-more {
+  text-align: center;
+}
+
+.jobs-more p {
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+/* Shimmer Loading Effect */
+.shimmer-card {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  padding: 1.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.shimmer-line {
+  background: #e0e0e0;
+  border-radius: 4px;
+  height: 14px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-line.title {
+  height: 20px;
+  width: 70%;
+  margin-bottom: 0.5rem;
+}
+
+.shimmer-line.company {
+  height: 16px;
+  width: 50%;
+  margin-bottom: 1rem;
+}
+
+.shimmer-line.level {
+  height: 14px;
+  width: 40%;
+  margin-top: -8px;
+  margin-bottom: 0.9rem;
+}
+
+.shimmer-line.footer {
+  height: 14px;
+  width: 30%;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.shimmer-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.4) 20%,
+    rgba(255, 255, 255, 0.8) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

@@ -1,0 +1,77 @@
+/* Download Section */
+.download {
+  background: var(--grad);
+  padding: 80px 5%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.download::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 70% at 50% 50%, rgba(255, 180, 60, 0.1) 0%, transparent 65%);
+}
+
+.download-container {
+  max-width: 660px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.download-title {
+  font-size: clamp(1.7rem, 3.5vw, 2.8rem);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 0.9rem;
+}
+
+.download-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.76);
+  margin-bottom: 2.2rem;
+  line-height: 1.85;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-download {
+  background: #fff;
+  color: var(--navy);
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.btn-download:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28);
+}
+
+.btn-ios {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+.download-note {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.8rem;
+  margin-top: 1.3rem;
+}

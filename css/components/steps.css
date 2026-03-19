@@ -1,0 +1,66 @@
+/* Steps Section */
+.steps {
+  background: var(--bg);
+  padding: 80px 5%;
+}
+
+.steps-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.steps-row::before {
+  content: '';
+  position: absolute;
+  top: 33px;
+  right: 8%;
+  left: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--gold));
+  z-index: 0;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-width: 110px;
+  max-width: 170px;
+  position: relative;
+  z-index: 1;
+  padding: 0 0.5rem;
+}
+
+.step-number {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: var(--grad);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 0.9rem;
+  box-shadow: 0 8px 20px rgba(0, 64, 128, 0.3);
+  border: 4px solid #fff;
+}
+
+.step-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.step-description {
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+  line-height: 1.5;
+}

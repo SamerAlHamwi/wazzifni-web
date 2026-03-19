@@ -1,0 +1,128 @@
+/* Path Component Styles */
+.path {
+    padding: 5rem 0;
+    background: #fff;
+}
+
+.path-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.path-card {
+    position: relative;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 40px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.path-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--grad);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.path-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--blue);
+    background: #fff;
+    box-shadow: var(--shadow-lg);
+}
+
+.path-card:hover::before {
+    opacity: 1;
+}
+
+.path-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    filter: drop-shadow(0 6px 12px rgba(0, 135, 198, 0.15));
+    transition: var(--transition);
+}
+
+.path-card:hover .path-icon {
+    transform: scale(1.15) rotate(8deg);
+}
+
+.path-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--navy);
+    margin-bottom: 0.8rem;
+}
+
+.path-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 300px;
+    line-height: 1.6;
+}
+
+.path-badge {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: var(--grad-gold);
+    color: #fff;
+    padding: 0.5rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-md);
+    z-index: 2;
+}
+
+@media (max-width: 900px) {
+    .path-grid {
+        gap: 2rem;
+        padding: 0 20px;
+    }
+
+    .path-title {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .path {
+        padding: 4rem 5%;
+    }
+
+    .path-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 400px;
+    }
+
+    .path-card {
+        aspect-ratio: auto;
+        min-height: 320px;
+        padding: 3rem 2rem;
+    }
+
+    .path-icon {
+        font-size: 4rem;
+    }
+}
