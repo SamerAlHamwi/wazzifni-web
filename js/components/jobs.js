@@ -72,7 +72,16 @@ export class Jobs {
     }
 
     async fetchJobs() {
-        const response = await fetch('https://api.wazzifni.net/api/services/app/JobPost/GetLastJobPosts');
+        const response = await fetch(
+        'https://api.wazzifni.net/api/services/app/JobPost/GetLastJobPosts',
+        {
+             method: 'GET',
+             headers: {
+                 'Content-Type': 'application/json',
+                 'Accept': 'application/json',
+             },
+         }
+        );
         const data = await response.json();
 
         if (data && data.success && data.result && data.result.items) {
