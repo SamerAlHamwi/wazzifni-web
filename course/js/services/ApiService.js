@@ -1,5 +1,5 @@
 const ApiService = {
-    BASE_URL: 'https://course.wazzifni.online/api/v1',
+    BASE_URL: 'https://admin.wazzifni.online/api/course',
 
     async request(endpoint, options = {}) {
         const url = `${this.BASE_URL}${endpoint}`;
