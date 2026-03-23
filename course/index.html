@@ -6,11 +6,11 @@
     <title>Wazzifni Job Readiness Program</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <!-- CSS Files (Absolute paths to ensure they work regardless of sub-route) -->
+    <link rel="stylesheet" href="/course/css/variables.css">
+    <link rel="stylesheet" href="/course/css/main.css">
+    <link rel="stylesheet" href="/course/css/components.css">
+    <link rel="stylesheet" href="/course/css/responsive.css">
 
     <style>
         /* Modal specific adjustments */
@@ -68,7 +68,7 @@
 <nav>
     <div style="display:flex; align-items:center; gap:2rem;">
         <div class="logo-wrap">
-            <img src="assets/images/logo.png" alt="Wazzifni Logo" class="logo-img">
+            <img src="/course/assets/images/logo.png" alt="Wazzifni Logo" class="logo-img">
             <div>
                 <div class="logo">Wazzifni</div>
                 <div class="logo-subtitle">Job Readiness Program</div>
@@ -212,15 +212,15 @@
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- JavaScript Files -->
-<script src="js/models/Course.js"></script>
-<script src="js/services/ApiService.js"></script>
-<script src="js/services/CourseService.js"></script>
-<script src="js/services/RegistrationService.js"></script>
-<script src="js/services/StorageService.js"></script>
-<script src="js/services/UtilsService.js"></script>
-<script src="js/views/UserView.js"></script>
-<script src="js/views/ModalView.js"></script>
-<script src="js/controllers/MainController.js"></script>
-<script src="js/app.js"></script>
+<script src="/course/js/models/Course.js"></script>
+<script src="/course/js/services/ApiService.js"></script>
+<script src="/course/js/services/CourseService.js"></script>
+<script src="/course/js/services/RegistrationService.js"></script>
+<script src="/course/js/services/StorageService.js"></script>
+<script src="/course/js/services/UtilsService.js"></script>
+<script src="/course/js/views/UserView.js"></script>
+<script src="/course/js/views/ModalView.js"></script>
+<script src="/course/js/controllers/MainController.js"></script>
+<script src="/course/js/app.js"></script>
 </body>
 </html>
