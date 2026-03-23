@@ -74,7 +74,7 @@ export class Jobs {
     async fetchJobs() {
         // Use the proxy configured in nginx.conf to avoid CORS issues
         const response = await fetch(
-            '/api-proxy/services/app/JobPost/GetLastJobPosts',
+            '/wazzifni-proxy/services/app/JobPost/GetLastJobPosts',
             {
                 method: 'GET',
                 headers: {
