@@ -52,5 +52,46 @@ const UtilsService = {
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
+    },
+
+    translate(value) {
+        const dictionary = {
+            // Governorates
+            'Najaf': 'النجف',
+            'Baghdad': 'بغداد',
+            'Basra': 'البصرة',
+            'Nineveh': 'نينوى',
+            'Erbil': 'أربيل',
+            'Sulaymaniyah': 'السليمانية',
+            'Duhok': 'دهوك',
+            'Kirkuk': 'كركوك',
+            'Anbar': 'الأنبار',
+            'Babil': 'بابل',
+            'Karbala': 'كربلاء',
+            'Qadisiyah': 'القادسية',
+            'Wasit': 'واسط',
+            'Salah Al-Din': 'صلاح الدين',
+            'Diyala': 'ديالى',
+            'Maysan': 'ميسان',
+            'Muthanna': 'المثنى',
+            'Dhi Qar': 'ذي قار',
+
+            // Education Levels
+            'No Formal Education': 'بدون شهادة',
+            'Primary School': 'ابتدائي',
+            'Middle School': 'متوسط',
+            'High School': 'إعدادي',
+            'Diploma': 'دبلوم',
+            'Bachelor’s Degree': 'بكالوريوس',
+            'Master’s Degree': 'ماجستير',
+            'PhD': 'دكتوراه',
+
+            // Job Status
+            'Student': 'طالب',
+            'Employee': 'موظف',
+            'Unemployed': 'عاطل'
+        };
+
+        return dictionary[value] || value;
     }
 };

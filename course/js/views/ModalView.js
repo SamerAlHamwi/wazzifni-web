@@ -141,7 +141,7 @@ const ModalView = {
                     <div class="registrant-name">${r.studentName || r.name}</div>
                     <div class="registrant-contact">${r.studentPhone || r.phone}${ (r.studentEmail || r.email) ? ' • ' + (r.studentEmail || r.email) : ''}</div>
                     <div class="registrant-extra" style="font-size: 0.8rem; color: var(--muted); margin-top: 4px;">
-                        📍 ${r.governorate || 'غير محدد'} | 🎓 ${r.educationLevel || 'غير محدد'} | 💼 ${r.currentJob || 'غير محدد'}
+                        📍 ${UtilsService.translate(r.governorate) || 'غير محدد'} | 🎓 ${UtilsService.translate(r.educationLevel) || 'غير محدد'} | 💼 ${UtilsService.translate(r.currentJob) || 'غير محدد'}
                     </div>
                 </div>
                 <div class="registrant-date">${UtilsService.formatDateTime(r.registeredAt || r.date)}</div>
