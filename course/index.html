@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wazzifni Job Readiness Program</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* Modal specific adjustments */
+        #registerModal .modal {
+            max-width: 650px !important;
+            width: 95%;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        .registration-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            text-align: right;
+            width: 100%;
+        }
+
+        .registration-form-grid .form-group {
+            width: 100%;
+        }
+
+        .registration-form-grid .form-group input,
+        .registration-form-grid .form-group select {
+            width: 100%;
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .registration-form-grid {
+                grid-template-columns: 1fr;
+            }
+            .registration-form-grid .form-group.span-2 {
+                grid-column: span 1 !important;
+            }
+            #registerModal .modal {
+                padding: 1.5rem;
+            }
+        }
+
+        .span-2 {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay" style="display:none;">
+    <div class="spinner"></div>
+</div>
+
+<!-- Navigation -->
+<nav>
+    <div style="display:flex; align-items:center; gap:2rem;">
+        <div class="logo-wrap">
+            <img src="assets/images/logo.png" alt="Wazzifni Logo" class="logo-img">
+            <div>
+                <div class="logo">Wazzifni</div>
+                <div class="logo-subtitle">Job Readiness Program</div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:1.5rem;">
+        <div class="nav-tabs user-appbar-links">
+            <button class="nav-tab active" data-view="user">🎓 الدورات</button>
+        </div>
+    </div>
+</nav>
+
+<!-- User View -->
+<div id="userView" class="view active">
+    <div class="page-header">
+        <h1>الدورات التدريبية المتاحة</h1>
+        <p>اكتشف أفضل الدورات واحجز مقعدك الآن</p>
+    </div>
+    <div id="userStats" class="stats-bar"></div>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="🔍 ابحث عن دورة...">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="free">مجانية</button>
+        <button class="filter-btn" data-filter="paid">مدفوعة</button>
+        <button class="filter-btn" data-filter="open">متاحة</button>
+    </div>
+    <div id="userCoursesList" class="cards-grid"></div>
+    <!-- Pagination for User View -->
+    <div id="userPagination" class="pagination"></div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal-overlay" id="registerModal">
+    <div class="modal">
+        <h2>📝 التسجيل في الدورة</h2>
+        <div class="modal-course-info" id="modalCourseInfo"></div>
+
+        <div class="registration-form-grid">
+            <div class="form-group span-2">
+                <label>الاسم الكامل</label>
+                <input type="text" id="regName" placeholder="أدخل اسمك الكامل">
+            </div>
+            <div class="form-group">
+                <label>رقم الهاتف</label>
+                <input type="tel" id="regPhone" placeholder="07XXXXXXXXX">
+            </div>
+            <div class="form-group">
+                <label>البريد الإلكتروني (اختياري)</label>
+                <input type="email" id="regEmail" placeholder="example@email.com">
+            </div>
+
+            <div class="form-group">
+                <label>المحافظة</label>
+                <select id="regGovernorate">
+                    <option value="" disabled selected>اختر المحافظة</option>
+                    <option value="Najaf">النجف (Najaf)</option>
+                    <option value="Baghdad">بغداد (Baghdad)</option>
+                    <option value="Basra">البصرة (Basra)</option>
+                    <option value="Nineveh">نينوى (Nineveh)</option>
+                    <option value="Erbil">أربيل (Erbil)</option>
+                    <option value="Sulaymaniyah">السليمانية (Sulaymaniyah)</option>
+                    <option value="Duhok">دهوك (Duhok)</option>
+                    <option value="Kirkuk">كركوك (Kirkuk)</option>
+                    <option value="Anbar">الأنبار (Anbar)</option>
+                    <option value="Babil">بابل (Babil)</option>
+                    <option value="Karbala">كربلاء (Karbala)</option>
+                    <option value="Qadisiyah">القادسية (Qadisiyah)</option>
+                    <option value="Wasit">واسط (Wasit)</option>
+                    <option value="Salah Al-Din">صلاح الدين (Salah Al-Din)</option>
+                    <option value="Diyala">ديالى (Diyala)</option>
+                    <option value="Maysan">ميسان (Maysan)</option>
+                    <option value="Muthanna">المثنى (Muthanna)</option>
+                    <option value="Dhi Qar">ذي قار (Dhi Qar)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>التحصيل الدراسي</label>
+                <select id="regEducationLevel">
+                    <option value="" disabled selected>اختر التحصيل</option>
+                    <option value="No Formal Education">بدون شهادة (No Formal Education)</option>
+                    <option value="Primary School">ابتدائي (Primary School)</option>
+                    <option value="Middle School">متوسط (Middle School)</option>
+                    <option value="High School">إعدادي (High School)</option>
+                    <option value="Diploma">دبلوم (Diploma)</option>
+                    <option value="Bachelor’s Degree">بكالوريوس (Bachelor’s Degree)</option>
+                    <option value="Master’s Degree">ماجستير (Master’s Degree)</option>
+                    <option value="PhD">دكتوراه (PhD)</option>
+                </select>
+            </div>
+
+            <div class="form-group span-2">
+                <label>الوظيفة الحالية</label>
+                <select id="regCurrentJob">
+                    <option value="" disabled selected>اختر الوظيفة</option>
+                    <option value="Student">طالب (Student)</option>
+                    <option value="Employee">موظف (Employee)</option>
+                    <option value="Unemployed">عاطل (Unemployed)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="modal-actions" style="margin-top: 20px;">
+            <button class="btn btn-success" id="confirmRegisterBtn" style="width: 100%;">✅ تأكيد التسجيل</button>
+            <button class="btn btn-ghost" id="closeModalBtn" style="width: 100%; margin-top: 10px;">إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<!-- Course Detail Modal (for User View) -->
+<div class="modal-overlay" id="courseDetailModal">
+    <div class="modal course-detail-modal">
+        <div class="cdm-header">
+            <button class="close-detail-btn" id="closeDetailBtn">✕</button>
+            <div class="cdm-header-content">
+                <img id="cdmTeacherImg" src="" alt="" class="cdm-teacher-img">
+                <div>
+                    <div id="cdmCourseName" class="cdm-course-name"></div>
+                    <div id="cdmTeacherName" class="cdm-teacher-name"></div>
+                </div>
+            </div>
+        </div>
+        <div class="cdm-body">
+            <div id="cdmStats" class="cdm-stats"></div>
+            <div class="cdm-description">
+                <div class="cdm-section-title">📄 وصف الدورة</div>
+                <div id="cdmDesc" class="cdm-desc-text"></div>
+            </div>
+            <div id="cdmRegistrantsWrap" class="cdm-registrants" style="display:none">
+                <div class="cdm-section-title">👥 המتقدمون</div>
+                <div id="cdmRegistrants" class="cdm-registrants-list"></div>
+            </div>
+            <div id="cdmFooterBtns" class="cdm-footer"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- JavaScript Files -->
+<script src="js/models/Course.js"></script>
+<script src="js/services/ApiService.js"></script>
+<script src="js/services/CourseService.js"></script>
+<script src="js/services/RegistrationService.js"></script>
+<script src="js/services/StorageService.js"></script>
+<script src="js/services/UtilsService.js"></script>
+<script src="js/views/UserView.js"></script>
+<script src="js/views/ModalView.js"></script>
+<script src="js/controllers/MainController.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
