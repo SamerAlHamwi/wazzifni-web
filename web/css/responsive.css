@@ -8,10 +8,22 @@
 @media (max-width: 900px) {
   .hero-container {
     grid-template-columns: 1fr;
+    text-align: center;
+    gap: 4rem;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
   }
 
   .hero-phone {
-    display: none;
+    display: flex;
+    order: 2;
   }
 
   .employers-grid {
@@ -40,6 +52,10 @@
     padding: 60px 5%;
   }
 
+  .hero {
+    padding-top: 120px;
+  }
+
   .hero-buttons {
     flex-direction: column;
   }
@@ -64,6 +80,21 @@
   .step-item {
     max-width: 100%;
     flex: 0 0 calc(50% - 1rem);
+  }
+
+  .phone-frame {
+    width: 220px;
+    height: 420px;
+  }
+
+  .card-1 {
+    left: -20px;
+    scale: 0.8;
+  }
+
+  .card-2 {
+    right: -20px;
+    scale: 0.8;
   }
 }
 
