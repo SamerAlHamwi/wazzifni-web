@@ -30,6 +30,24 @@ class MainController {
         // Initial load
         await this.loadCourses();
         this.renderStats();
+
+        // Check for course id in URL (e.g., ?id=... or path)
+        const urlParams = new URLSearchParams(window.location.search);
+        let courseId = urlParams.get('id');
+
+        // Fallback: check pathname if using pretty URLs like /course/ID
+        if (!courseId) {
+            const pathParts = window.location.pathname.split('/');
+            // If path is /course/123, parts might be ["", "course", "123"]
+            const lastPart = pathParts[pathParts.length - 1];
+            if (lastPart && lastPart !== 'index.html' && lastPart !== 'course' && lastPart !== '') {
+                courseId = lastPart;
+            }
+        }
+
+        if (courseId) {
+            this.openCourseDetail(courseId);
+        }
     }
 
     bindEvents() {
@@ -51,6 +69,9 @@ class MainController {
                 case 'register-from-detail':
                     ModalView.closeCourseDetail();
                     this.openRegister(courseId);
+                    break;
+                case 'share':
+                    this.shareCourseLink(courseId);
                     break;
             }
         });
@@ -114,10 +135,25 @@ class MainController {
         await this.loadCourses();
     }
 
-    openCourseDetail(id) {
-        const course = this.courses.find(c => c.id === id);
-        if (!course) return;
-        ModalView.openCourseDetail(course, false);
+    async openCourseDetail(id) {
+        let course = this.courses.find(c => c.id === id);
+
+        if (!course) {
+            try {
+                this.setLoading(true);
+                // Try to fetch by ID or slug
+                course = await CourseService.getCourse(id);
+            } catch (error) {
+                console.error('Could not find course:', id);
+                return;
+            } finally {
+                this.setLoading(false);
+            }
+        }
+
+        if (course) {
+            ModalView.openCourseDetail(course, false);
+        }
     }
 
     openRegister(courseId) {
@@ -146,6 +182,17 @@ class MainController {
         } finally {
             this.setLoading(false);
         }
+    }
+
+    shareCourseLink(courseId) {
+        const shareUrl = `${window.location.origin}/course/?id=${courseId}`;
+        UtilsService.copyToClipboard(shareUrl)
+            .then(() => {
+                this.showToast('✅ تم نسخ رابط الدورة إلى الحافظة', 'success');
+            })
+            .catch(() => {
+                this.showToast('❌ فشل نسخ الرابط', 'error');
+            });
     }
 
     showToast(msg, type = 'info') {

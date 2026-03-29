@@ -96,6 +96,7 @@ const UserView = {
                         ${course.isFull()
                             ? '<div class="full-label">🔴 مكتملة</div>'
                             : `<button class="btn btn-success btn-sm" data-action="register" data-course-id="${course.id}">📝 سجّل الآن</button>`}
+                        <button class="btn btn-share btn-sm" data-action="share" data-course-id="${course.id}" title="مشاركة الرابط">🔗</button>
                     </div>
                 </div>
             </div>`;
