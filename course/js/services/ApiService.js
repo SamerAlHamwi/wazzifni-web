@@ -1,5 +1,6 @@
 const ApiService = {
-    BASE_URL: 'https://ad.wazzifni.net/api/course',
+    // Use the proxy defined in nginx.conf to avoid CORS issues
+    BASE_URL: '/api-proxy/course',
 
     async request(endpoint, options = {}) {
         const url = `${this.BASE_URL}${endpoint}`;
