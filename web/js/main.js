@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // iOS detection
     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-      window.location.href = "https://apps.apple.com/us/app/wazzifni-%D9%88%D8%B8%D9%81%D9%86%D9%8I/id6743117085";
+      window.location.href = "https://apps.apple.com/app/id6743117085";
       return;
     }
 
