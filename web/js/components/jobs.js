@@ -159,7 +159,7 @@ export class Jobs {
             else if (job.title.includes('تصميم') || job.title.includes('مبرمج')) icon = '💻';
 
             const jobCardHTML = `
-                <div class="job-card rv" onclick="window.modal.show()">
+                <div class="job-card rv" onclick="window.downloadApp()">
                     <div class="job-header">
                         <h3 class="job-title">${job.title}</h3>
                         <span class="job-badge">${engagement}</span>

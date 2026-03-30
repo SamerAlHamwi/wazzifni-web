@@ -20,6 +20,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize intersection observers for reveal animations
   initObservers();
 
+  // Smart download function
+  window.downloadApp = () => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // iOS detection
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      window.location.href = "https://apps.apple.com/us/app/wazzifni-%D9%88%D8%B8%D9%81%D9%86%D9%8I/id6743117085";
+      return;
+    }
+
+    // Android detection
+    if (/android/i.test(userAgent)) {
+      window.location.href = "https://play.google.com/store/apps/details?id=com.wazzifni.iraq";
+      return;
+    }
+
+    // Fallback for desktop and others
+    if (window.modal) {
+      window.modal.show();
+    }
+  };
+
   // Handle navbar shadow on scroll
   handleNavbarShadow();
 
