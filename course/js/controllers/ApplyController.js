@@ -41,7 +41,6 @@ class ApplyController {
                 const parsedCourse = JSON.parse(cachedCourse);
                 // Check if it's the right course (check id, slug or mongo _id)
                 if (parsedCourse.id === this.courseId || parsedCourse._id === this.courseId || parsedCourse.slug === this.courseId) {
-                    console.log('Using cached course data');
                     this.course = parsedCourse;
                     this.renderCourseInfo();
                     this.setLoading(false);
