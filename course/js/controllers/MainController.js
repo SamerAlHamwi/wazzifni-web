@@ -57,7 +57,13 @@ class MainController {
             if (!target) return;
 
             const action = target.dataset.action;
-            const courseId = target.dataset.courseId;
+            // Get courseId from the target or its closest parent with data-course-id
+            const courseId = target.dataset.courseId || target.closest('[data-course-id]')?.dataset.courseId;
+
+            if (!courseId && (action === 'detail' || action === 'register' || action === 'register-from-detail' || action === 'share')) {
+                console.warn('Action triggered but courseId is missing', action);
+                return;
+            }
 
             switch(action) {
                 case 'detail':
@@ -157,11 +163,13 @@ class MainController {
     }
 
     openRegister(courseId) {
-        window.location.href = `/course/apply.html?id=${courseId}`;
+        // Use relative path to be more robust across different environments
+        // If we are in /course/ index.html, we want to go to apply.html in the same dir
+        window.location.href = `apply.html?id=${courseId}`;
     }
 
     async confirmRegister() {
-        // This is now moved to ApplyController.js
+        // Handled in ApplyController.js
     }
 
     shareCourseLink(courseId) {
