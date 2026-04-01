@@ -44,7 +44,7 @@ const ModalView = {
                 </div>`;
         }
 
-        ['regName', 'regPhone', 'regEmail', 'regGovernorate', 'regEducationLevel', 'regCurrentJob'].forEach(id => {
+        ['regName', 'regPhone', 'regGender', 'regEmail', 'regGovernorate', 'regEducationLevel', 'regStudyDescription', 'regCurrentJob'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.value = '';
         });
@@ -163,9 +163,11 @@ const ModalView = {
         return {
             studentName: document.getElementById('regName')?.value.trim() || '',
             studentPhone: document.getElementById('regPhone')?.value.trim() || '',
+            gender: document.getElementById('regGender')?.value || '',
             studentEmail: document.getElementById('regEmail')?.value || '',
             governorate: document.getElementById('regGovernorate')?.value || '',
             educationLevel: document.getElementById('regEducationLevel')?.value || '',
+            studyDescription: document.getElementById('regStudyDescription')?.value.trim() || '',
             currentJob: document.getElementById('regCurrentJob')?.value || ''
         };
     }

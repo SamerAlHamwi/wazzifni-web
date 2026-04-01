@@ -165,7 +165,7 @@ class MainController {
 
     async confirmRegister() {
         const data = ModalView.getRegisterData();
-        if (!data.studentName || !data.studentPhone || !data.governorate || !data.educationLevel || !data.currentJob) {
+        if (!data.studentName || !data.studentPhone || !data.gender || !data.governorate || !data.educationLevel || !data.studyDescription || !data.currentJob) {
             this.showToast('⚠️ يرجى ملء جميع الحقول المطلوبة', 'error');
             return;
         }
