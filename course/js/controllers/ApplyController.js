@@ -35,11 +35,33 @@ class ApplyController {
     async loadCourse() {
         this.setLoading(true);
         try {
+            // Try to get from localStorage first to avoid unnecessary API call
+            const cachedCourse = localStorage.getItem('selectedCourse');
+            if (cachedCourse) {
+                const parsedCourse = JSON.parse(cachedCourse);
+                // Check if it's the right course (check id, slug or mongo _id)
+                if (parsedCourse.id === this.courseId || parsedCourse._id === this.courseId || parsedCourse.slug === this.courseId) {
+                    console.log('Using cached course data');
+                    this.course = parsedCourse;
+                    this.renderCourseInfo();
+                    this.setLoading(false);
+                    return;
+                }
+            }
+
+            // Fallback to API if not in localStorage or ID mismatch
+            // If the user says "don't get course from backend", we could skip this
+            // but for safety if someone comes from a direct link we try to load it.
             this.course = await CourseService.getCourse(this.courseId);
             this.renderCourseInfo();
         } catch (error) {
+            console.error('ApplyController.loadCourse error:', error);
             this.showToast('❌ فشل تحميل بيانات الدورة: ' + error.message, 'error');
-            setTimeout(() => window.location.href = '/course/', 2000);
+
+            // If we don't have a course loaded at all, we can't show info
+            if (!this.course) {
+                setTimeout(() => window.location.href = '/course/', 2000);
+            }
         } finally {
             this.setLoading(false);
         }
@@ -49,14 +71,22 @@ class ApplyController {
         const infoEl = document.getElementById('courseInfo');
         if (!infoEl || !this.course) return;
 
+        // The object from localStorage might have different property names if it was serialized directly from a Course instance or from raw data
+        const name = this.course.name || '';
+        const teacherName = this.course.teacherName || this.course.instructorName || '';
+        const startDate = this.course.startDate || '';
+        const seatsLeft = this.course.seatsLeft !== undefined ? this.course.seatsLeft : 0;
+        const type = this.course.type || 'free';
+        const price = this.course.price || 0;
+
         infoEl.innerHTML = `
-            <h2>${this.course.name}</h2>
+            <h2>${name}</h2>
             <div class="meta">
-                <span>👨‍🏫 ${this.course.teacherName}</span>
-                <span>📅 ${UtilsService.formatDate(this.course.startDate)}</span>
-                <span>🪑 ${this.course.seatsLeft} مقعد متبقي</span>
-                <span style="color:${this.course.type === 'free' ? 'var(--success)' : 'var(--orange)'}; font-weight: 700;">
-                    ${this.course.type === 'free' ? '🆓 مجانية' : UtilsService.formatPrice(this.course.price)}
+                <span>👨‍🏫 ${teacherName}</span>
+                <span>📅 ${UtilsService.formatDate(startDate)}</span>
+                <span>🪑 ${seatsLeft} مقعد متبقي</span>
+                <span style="color:${type === 'free' ? 'var(--success)' : 'var(--orange)'}; font-weight: 700;">
+                    ${type === 'free' ? '🆓 مجانية' : UtilsService.formatPrice(price)}
                 </span>
             </div>
         `;

@@ -142,13 +142,16 @@ class MainController {
     }
 
     async openCourseDetail(id) {
-        let course = this.courses.find(c => c.id === id);
+        let course = this.courses.find(c => c.id === id || c.slug === id);
 
         if (!course) {
             try {
                 this.setLoading(true);
                 // Try to fetch by ID or slug
                 course = await CourseService.getCourse(id);
+                if (course) {
+                    this.courses.push(course);
+                }
             } catch (error) {
                 console.error('Could not find course:', id);
                 return;
@@ -163,8 +166,14 @@ class MainController {
     }
 
     openRegister(courseId) {
+        // Find the course in the list to pass its info to the apply page
+        // Check for both id and slug as the parameter might be either
+        const course = this.courses.find(c => c.id === courseId || c.slug === courseId);
+        if (course) {
+            localStorage.setItem('selectedCourse', JSON.stringify(course));
+        }
+
         // Use relative path to be more robust across different environments
-        // If we are in /course/ index.html, we want to go to apply.html in the same dir
         window.location.href = `apply.html?id=${courseId}`;
     }
 
