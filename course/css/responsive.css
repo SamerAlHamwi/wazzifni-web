@@ -156,10 +156,18 @@
         display: block;
     }
 
+    /* Modal Mobile Adjustments */
+    .modal-overlay {
+        align-items: flex-start;
+        overflow-y: auto;
+        padding: 1rem 0.5rem;
+    }
+
     .modal {
         padding: 1.2rem;
         border-radius: 14px;
-        max-width: 98vw;
+        max-width: 100%;
+        margin: 0 auto;
     }
 
     .modal h2 {
@@ -175,6 +183,112 @@
     .modal-actions .btn {
         width: 100%;
         justify-content: center;
+    }
+
+    /* Course Detail Modal Specifics */
+    .course-detail-modal {
+        padding: 0;
+        width: 100% !important;
+    }
+
+    .cdm-header {
+        padding: 1.5rem 1rem;
+    }
+
+    .cdm-header-content {
+        gap: 1rem;
+    }
+
+    .cdm-teacher-img {
+        width: 60px;
+        height: 60px;
+        border-width: 2px;
+    }
+
+    .cdm-course-name {
+        font-size: 1.1rem;
+        line-height: 1.4;
+    }
+
+    .cdm-teacher-name {
+        font-size: 0.85rem;
+    }
+
+    .cdm-body {
+        padding: 1rem;
+        max-height: none;
+    }
+
+    .cdm-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .cdm-stat-box {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .cdm-stat-box .val {
+        font-size: 1.2rem;
+    }
+
+    .cdm-stat-box .lbl {
+        font-size: 0.7rem;
+    }
+
+    .cdm-progress-box {
+        grid-column: 1 / -1;
+        padding: 1rem;
+    }
+
+    .cdm-section-title {
+        font-size: 0.95rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .cdm-desc-text {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .registrant-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 0.8rem;
+    }
+
+    .registrant-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+
+    .registrant-info {
+        width: 100%;
+    }
+
+    .registrant-name {
+        font-size: 0.9rem;
+    }
+
+    .registrant-contact {
+        font-size: 0.75rem;
+        text-align: right;
+    }
+
+    .registrant-date {
+        align-self: flex-end;
+        font-size: 0.7rem;
+        margin-top: -15px;
+    }
+
+    .cdm-footer {
+        margin-top: 1rem;
+        padding-top: 1rem;
     }
 
     .applicants-filters {
