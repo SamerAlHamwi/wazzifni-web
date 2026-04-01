@@ -57,7 +57,13 @@ class MainController {
             if (!target) return;
 
             const action = target.dataset.action;
-            const courseId = target.dataset.courseId;
+            // Get courseId from the target or its closest parent with data-course-id
+            const courseId = target.dataset.courseId || target.closest('[data-course-id]')?.dataset.courseId;
+
+            if (!courseId && (action === 'detail' || action === 'register' || action === 'register-from-detail' || action === 'share')) {
+                console.warn('Action triggered but courseId is missing', action);
+                return;
+            }
 
             switch(action) {
                 case 'detail':
@@ -136,13 +142,16 @@ class MainController {
     }
 
     async openCourseDetail(id) {
-        let course = this.courses.find(c => c.id === id);
+        let course = this.courses.find(c => c.id === id || c.slug === id);
 
         if (!course) {
             try {
                 this.setLoading(true);
                 // Try to fetch by ID or slug
                 course = await CourseService.getCourse(id);
+                if (course) {
+                    this.courses.push(course);
+                }
             } catch (error) {
                 console.error('Could not find course:', id);
                 return;
@@ -157,31 +166,19 @@ class MainController {
     }
 
     openRegister(courseId) {
-        const course = this.courses.find(c => c.id === courseId);
-        if (!course || course.seatsLeft === 0) return;
-        this.registeringCourseId = courseId;
-        ModalView.openRegisterModal(course);
+        // Find the course in the list to pass its info to the apply page
+        // Check for both id and slug as the parameter might be either
+        const course = this.courses.find(c => c.id === courseId || c.slug === courseId);
+        if (course) {
+            localStorage.setItem('selectedCourse', JSON.stringify(course));
+        }
+
+        // Use relative path to be more robust across different environments
+        window.location.href = `apply.html?id=${courseId}`;
     }
 
     async confirmRegister() {
-        const data = ModalView.getRegisterData();
-        if (!data.studentName || !data.studentPhone || !data.governorate || !data.educationLevel || !data.currentJob) {
-            this.showToast('⚠️ يرجى ملء جميع الحقول المطلوبة', 'error');
-            return;
-        }
-
-        this.setLoading(true);
-        try {
-            await CourseService.registerToCourse(this.registeringCourseId, data);
-
-            ModalView.closeRegisterModal();
-            this.showToast('✅ تم التسجيل بنجاح سيتم التواصل معك قريباً', 'success');
-            await this.loadCourses();
-        } catch (error) {
-            this.showToast('❌ فشل التسجيل: ' + error.message, 'error');
-        } finally {
-            this.setLoading(false);
-        }
+        // Handled in ApplyController.js
     }
 
     shareCourseLink(courseId) {

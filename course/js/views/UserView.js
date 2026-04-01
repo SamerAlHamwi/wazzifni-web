@@ -54,9 +54,6 @@ const UserView = {
     },
 
     renderCourseCard(course) {
-        const pct = course.getSeatsPercentage();
-        const progressClass = course.getProgressClass();
-        const countClass = course.getSeatsStatusClass();
         const teacherImg = course.teacherImg || UtilsService.generateAvatar(course.teacherName);
 
         return `
@@ -76,15 +73,6 @@ const UserView = {
                     <div class="card-meta">
                         <span class="meta-item"><span class="icon">📅</span>${UtilsService.formatDate(course.startDate)}</span>
                         <span class="meta-item"><span class="icon">🪑</span>${course.totalSeats} مقعد إجمالي</span>
-                    </div>
-                    <div class="seats-bar">
-                        <div class="seats-label">
-                            <span>المقاعد المتبقية</span>
-                            <span class="count ${countClass}">${course.seatsLeft} / ${course.totalSeats}</span>
-                        </div>
-                        <div class="progress-track">
-                            <div class="progress-fill ${progressClass}" style="width:${pct}%"></div>
-                        </div>
                     </div>
                 </div>
                 <div class="card-footer">
