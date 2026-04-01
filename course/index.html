@@ -13,47 +13,12 @@
     <link rel="stylesheet" href="/course/css/responsive.css">
 
     <style>
-        /* Modal specific adjustments */
-        #registerModal .modal {
+        /* Course Detail Modal adjustments */
+        #courseDetailModal .modal {
             max-width: 650px !important;
             width: 95%;
-            padding: 2rem;
+            padding: 0;
             overflow-x: hidden;
-        }
-
-        .registration-form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            text-align: right;
-            width: 100%;
-        }
-
-        .registration-form-grid .form-group {
-            width: 100%;
-        }
-
-        .registration-form-grid .form-group input,
-        .registration-form-grid .form-group select {
-            width: 100%;
-            box-sizing: border-box;
-            max-width: 100%;
-        }
-
-        @media (max-width: 600px) {
-            .registration-form-grid {
-                grid-template-columns: 1fr;
-            }
-            .registration-form-grid .form-group.span-2 {
-                grid-column: span 1 !important;
-            }
-            #registerModal .modal {
-                padding: 1.5rem;
-            }
-        }
-
-        .span-2 {
-            grid-column: span 2;
         }
     </style>
 </head>
@@ -99,98 +64,6 @@
     <div id="userCoursesList" class="cards-grid"></div>
     <!-- Pagination for User View -->
     <div id="userPagination" class="pagination"></div>
-</div>
-
-<!-- Register Modal -->
-<div class="modal-overlay" id="registerModal">
-    <div class="modal">
-        <h2>📝 التسجيل في الدورة</h2>
-        <div class="modal-course-info" id="modalCourseInfo"></div>
-
-        <div class="registration-form-grid">
-            <div class="form-group span-2">
-                <label>الاسم الكامل</label>
-                <input type="text" id="regName" placeholder="أدخل اسمك الكامل">
-            </div>
-            <div class="form-group">
-                <label>رقم الهاتف</label>
-                <input type="tel" id="regPhone" placeholder="07XXXXXXXXX">
-                <small style="display:block; color: #666; margin-top: 5px; font-size: 0.8rem;">الأرقام تكتب بالإنكيزية</small>
-            </div>
-            <div class="form-group">
-                <label>الجنس</label>
-                <select id="regGender">
-                    <option value="" disabled selected>اختر الجنس</option>
-                    <option value="male">ذكر (Male)</option>
-                    <option value="female">أنثى (Female)</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>البريد الإلكتروني (اختياري)</label>
-                <input type="email" id="regEmail" placeholder="example@email.com">
-            </div>
-
-            <div class="form-group">
-                <label>المحافظة</label>
-                <select id="regGovernorate">
-                    <option value="" disabled selected>اختر المحافظة</option>
-                    <option value="Najaf">النجف (Najaf)</option>
-                    <option value="Baghdad">بغداد (Baghdad)</option>
-                    <option value="Basra">البصرة (Basra)</option>
-                    <option value="Nineveh">نينوى (Nineveh)</option>
-                    <option value="Erbil">أربيل (Erbil)</option>
-                    <option value="Sulaymaniyah">السليمانية (Sulaymaniyah)</option>
-                    <option value="Duhok">دهوك (Duhok)</option>
-                    <option value="Kirkuk">كركوك (Kirkuk)</option>
-                    <option value="Anbar">الأنبار (Anbar)</option>
-                    <option value="Babil">بابل (Babil)</option>
-                    <option value="Karbala">كربلاء (Karbala)</option>
-                    <option value="Qadisiyah">القادسية (Qadisiyah)</option>
-                    <option value="Wasit">واسط (Wasit)</option>
-                    <option value="Salah Al-Din">صلاح الدين (Salah Al-Din)</option>
-                    <option value="Diyala">ديالى (Diyala)</option>
-                    <option value="Maysan">ميسان (Maysan)</option>
-                    <option value="Muthanna">المثنى (Muthanna)</option>
-                    <option value="Dhi Qar">ذي قار (Dhi Qar)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>التحصيل الدراسي</label>
-                <select id="regEducationLevel">
-                    <option value="" disabled selected>اختر التحصيل</option>
-                    <option value="No Formal Education">بدون شهادة (No Formal Education)</option>
-                    <option value="Primary School">ابتدائي (Primary School)</option>
-                    <option value="Middle School">متوسط (Middle School)</option>
-                    <option value="High School">إعدادي (High School)</option>
-                    <option value="Diploma">دبلوم (Diploma)</option>
-                    <option value="Bachelor’s Degree">بكالوريوس (Bachelor’s Degree)</option>
-                    <option value="Master’s Degree">ماجستير (Master’s Degree)</option>
-                    <option value="PhD">دكتوراه (PhD)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>التخصص الدراسي</label>
-                <input type="text" id="regStudyDescription" placeholder="أدخل تخصصك الدراسي">
-            </div>
-
-            <div class="form-group span-2">
-                <label>الوظيفة الحالية</label>
-                <select id="regCurrentJob">
-                    <option value="" disabled selected>اختر الوظيفة</option>
-                    <option value="Student">طالب (Student)</option>
-                    <option value="Employee">موظف (Employee)</option>
-                    <option value="Unemployed">عاطل (Unemployed)</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="modal-actions" style="margin-top: 20px;">
-            <button class="btn btn-success" id="confirmRegisterBtn" style="width: 100%;">✅ تأكيد التسجيل</button>
-            <button class="btn btn-ghost" id="closeModalBtn" style="width: 100%; margin-top: 10px;">إلغاء</button>
-        </div>
-    </div>
 </div>
 
 <!-- Course Detail Modal (for User View) -->

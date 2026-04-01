@@ -157,31 +157,11 @@ class MainController {
     }
 
     openRegister(courseId) {
-        const course = this.courses.find(c => c.id === courseId);
-        if (!course || course.seatsLeft === 0) return;
-        this.registeringCourseId = courseId;
-        ModalView.openRegisterModal(course);
+        window.location.href = `/course/apply.html?id=${courseId}`;
     }
 
     async confirmRegister() {
-        const data = ModalView.getRegisterData();
-        if (!data.studentName || !data.studentPhone || !data.gender || !data.governorate || !data.educationLevel || !data.studyDescription || !data.currentJob) {
-            this.showToast('⚠️ يرجى ملء جميع الحقول المطلوبة', 'error');
-            return;
-        }
-
-        this.setLoading(true);
-        try {
-            await CourseService.registerToCourse(this.registeringCourseId, data);
-
-            ModalView.closeRegisterModal();
-            this.showToast('✅ تم التسجيل بنجاح سيتم التواصل معك قريباً', 'success');
-            await this.loadCourses();
-        } catch (error) {
-            this.showToast('❌ فشل التسجيل: ' + error.message, 'error');
-        } finally {
-            this.setLoading(false);
-        }
+        // This is now moved to ApplyController.js
     }
 
     shareCourseLink(courseId) {
