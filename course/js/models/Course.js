@@ -5,13 +5,13 @@ class Course {
         this.teacherName = data.instructorName || data.teacherName || '';
         this.startDate = data.startDate || '';
         this.totalSeats = data.totalSeats || 0;
-        this.seatsLeft = data.seatsLeft !== undefined ? data.seatsLeft : this.totalSeats;
         this.type = data.type || 'free';
         this.price = data.price || 0;
         this.desc = data.description || data.desc || '';
         this.teacherImg = data.instructorImage || data.teacherImg || '';
         this.registrations = data.registrations || [];
         this.slug = data.slug || '';
+        this.status = data.status || 'open'; // open, completed
     }
 
     static fromJSON(json) {
@@ -25,18 +25,26 @@ class Course {
             instructorName: this.teacherName,
             startDate: this.startDate,
             totalSeats: this.totalSeats,
-            seatsLeft: this.seatsLeft,
             type: this.type,
             price: this.price,
             description: this.desc,
             instructorImage: this.teacherImg,
             registrations: this.registrations,
-            slug: this.slug
+            slug: this.slug,
+            status: this.status
         };
     }
 
-    isFull() {
-        return this.seatsLeft === 0;
+    getRegistrationCount() {
+        return this.registrations ? this.registrations.length : 0;
+    }
+
+    getAvailableSeats() {
+        return Math.max(0, this.totalSeats - this.getRegistrationCount());
+    }
+
+    isCompleted() {
+        return this.status === 'completed';
     }
 
     isFree() {
@@ -45,18 +53,23 @@ class Course {
 
     getSeatsPercentage() {
         if (this.totalSeats === 0) return 0;
-        return Math.round(((this.totalSeats - this.seatsLeft) / this.totalSeats) * 100);
+        const count = this.getRegistrationCount();
+        return Math.min(100, Math.round((count / this.totalSeats) * 100));
     }
 
     getSeatsStatusClass() {
-        if (this.seatsLeft === 0) return 'danger';
-        if (this.seatsLeft <= 3) return 'warn';
+        if (this.isCompleted()) return 'completed';
+        const available = this.getAvailableSeats();
+        if (available === 0) return 'danger';
+        if (available <= 3) return 'warn';
         return 'ok';
     }
 
     getProgressClass() {
-        if (this.seatsLeft === 0) return 'full';
-        if (this.seatsLeft <= 3) return 'warn';
+        if (this.isCompleted()) return 'completed';
+        const available = this.getAvailableSeats();
+        if (available === 0) return 'full';
+        if (available <= 3) return 'warn';
         return 'ok';
     }
 
@@ -68,8 +81,8 @@ class Course {
     }
 
     getStatusBadge() {
-        if (this.seatsLeft === 0) {
-            return '<span class="badge badge-full">🔴 مكتملة</span>';
+        if (this.isCompleted()) {
+            return '<span class="badge badge-completed">🏁 منتهية</span>';
         }
         return '<span class="badge badge-open">🟢 متاحة</span>';
     }

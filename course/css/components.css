@@ -257,6 +257,10 @@ select option {
     opacity: 0.95;
 }
 
+.course-card.completed {
+    opacity: 0.8;
+}
+
 .card-header {
     padding: 1.5rem;
     display: flex;
@@ -553,6 +557,12 @@ select option {
     background: rgba(76, 201, 240, 0.15);
     color: #4cc9f0;
     border: 1px solid rgba(76, 201, 240, 0.3);
+}
+
+.badge-completed {
+    background: rgba(108, 117, 125, 0.15);
+    color: #6c757d;
+    border: 1px solid rgba(108, 117, 125, 0.3);
 }
 
 /* Modals */

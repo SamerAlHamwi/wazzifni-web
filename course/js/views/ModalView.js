@@ -39,7 +39,6 @@ const ModalView = {
                 <div class="course-detail">
                     👨‍🏫 ${course.teacherName} &nbsp;|&nbsp;
                     📅 ${UtilsService.formatDate(course.startDate)} &nbsp;|&nbsp;
-                    🪑 ${course.seatsLeft} مقعد متبقي &nbsp;|&nbsp;
                     ${course.type === 'free' ? '🆓 مجانية' : UtilsService.formatPrice(course.price)}
                 </div>`;
         }
@@ -74,10 +73,10 @@ const ModalView = {
             }
         });
 
-        const regCount = course.totalSeats - course.seatsLeft;
+        const regCount = course.getRegistrationCount();
         const pct = course.getSeatsPercentage();
-        const statusColor = course.seatsLeft === 0 ? 'var(--fire)' :
-                           course.seatsLeft <= 3 ? 'var(--gold)' : 'var(--success)';
+        const statusColor = course.isCompleted() ? 'var(--muted)' :
+                           course.getAvailableSeats() <= 3 ? 'var(--gold)' : 'var(--success)';
 
         const statsEl = document.getElementById('cdmStats');
         if (statsEl) statsEl.innerHTML = this.renderStats(course, regCount, pct, statusColor);
@@ -107,12 +106,8 @@ const ModalView = {
                 <div class="lbl">إجمالي المقاعد</div>
             </div>
             <div class="cdm-stat-box">
-                <div class="val" style="color:${statusColor}">${course.seatsLeft}</div>
-                <div class="lbl">مقاعد متبقية</div>
-            </div>
-            <div class="cdm-stat-box">
                 <div class="val" style="color:var(--orange)">${regCount}</div>
-                <div class="lbl">مسجّل</div>
+                <div class="lbl">عدد المسجلين</div>
             </div>
             <div class="cdm-progress-box">
                 <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.85rem;font-weight:600;">
@@ -122,7 +117,9 @@ const ModalView = {
                 <div class="progress-track" style="height:10px;background:var(--border);">
                     <div class="progress-fill" style="width:${pct}%;background:linear-gradient(90deg,var(--sky),var(--blue));"></div>
                 </div>
-                <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;text-align:center;font-weight:700;">تم حجز ${pct}% من المقاعد</div>
+                <div style="font-size:0.75rem;color:var(--muted);margin-top:6px;text-align:center;font-weight:700;">
+                    ${course.isCompleted() ? 'هذه الدورة منتهية حالياً' : `تم حجز ${pct}% من المقاعد`}
+                </div>
             </div>`;
     },
 
@@ -152,11 +149,12 @@ const ModalView = {
     renderFooter(course, isAdminView) {
         if (isAdminView) return '';
 
-        if (course.seatsLeft > 0) {
-            return `<button class="btn btn-primary" style="width:100%;padding:1rem;font-size:1.1rem;border-radius:12px;"
-                        data-action="register-from-detail" data-course-id="${course.id}">📝 سجّل الآن في هذه الدورة</button>`;
+        if (course.isCompleted()) {
+            return '<div style="text-align:center;color:var(--muted);font-weight:800;padding:1rem;background:rgba(0,0,0,0.05);border-radius:12px;border:1px solid var(--border);">🏁 هذه الدورة منتهية</div>';
         }
-        return '<div style="text-align:center;color:var(--danger);font-weight:800;padding:1rem;background:rgba(255,71,87,0.1);border-radius:12px;border:1px solid var(--danger);">🔴 عذراً، هذه الدورة مكتملة تماماً</div>';
+
+        return `<button class="btn btn-primary" style="width:100%;padding:1rem;font-size:1.1rem;border-radius:12px;"
+                    data-action="register-from-detail" data-course-id="${course.id}">📝 سجّل الآن في هذه الدورة</button>`;
     },
 
     getRegisterData() {

@@ -31,7 +31,7 @@ const UserView = {
         statsEl.innerHTML = `
             <div class="stat-card gold"><div class="num">${stats.total}</div><div class="label">إجمالي الدورات</div></div>
             <div class="stat-card green"><div class="num">${stats.open}</div><div class="label">دورات متاحة</div></div>
-            <div class="stat-card red"><div class="num">${stats.full}</div><div class="label">دورات مكتملة</div></div>
+            <div class="stat-card red"><div class="num">${stats.completed}</div><div class="label">دورات مكتملة</div></div>
             <div class="stat-card blue"><div class="num">${stats.free}</div><div class="label">دورات مجانية</div></div>
         `;
     },
@@ -56,8 +56,15 @@ const UserView = {
     renderCourseCard(course) {
         const teacherImg = course.teacherImg || UtilsService.generateAvatar(course.teacherName);
 
+        let actionHtml = '';
+        if (course.isCompleted()) {
+            actionHtml = '<div class="full-label" style="color:var(--muted)">🏁 منتهية</div>';
+        } else {
+            actionHtml = `<button class="btn btn-success btn-sm" data-action="register" data-course-id="${course.id}">📝 سجّل الآن</button>`;
+        }
+
         return `
-            <div class="course-card ${course.isFull() ? 'full' : ''}" data-course-id="${course.id}">
+            <div class="course-card ${course.isCompleted() ? 'completed' : ''}" data-course-id="${course.id}">
                 <div class="card-header">
                     <img src="${teacherImg}" class="teacher-img" alt="">
                     <div class="card-title-block">
@@ -81,9 +88,7 @@ const UserView = {
                     </div>
                     <div style="display:flex;gap:0.5rem;align-items:center;">
                         <button class="btn btn-detail btn-sm" data-action="detail" data-course-id="${course.id}">👁️ تفاصيل</button>
-                        ${course.isFull()
-                            ? '<div class="full-label">🔴 مكتملة</div>'
-                            : `<button class="btn btn-success btn-sm" data-action="register" data-course-id="${course.id}">📝 سجّل الآن</button>`}
+                        ${actionHtml}
                         <button class="btn btn-share btn-sm" data-action="share" data-course-id="${course.id}" title="مشاركة الرابط">🔗</button>
                     </div>
                 </div>

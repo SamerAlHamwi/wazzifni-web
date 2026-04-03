@@ -41,7 +41,7 @@ class ApplyController {
                 const parsedCourse = JSON.parse(cachedCourse);
                 // Check if it's the right course (check id, slug or mongo _id)
                 if (parsedCourse.id === this.courseId || parsedCourse._id === this.courseId || parsedCourse.slug === this.courseId) {
-                    this.course = parsedCourse;
+                    this.course = new Course(parsedCourse);
                     this.renderCourseInfo();
                     this.setLoading(false);
                     return;
@@ -49,8 +49,6 @@ class ApplyController {
             }
 
             // Fallback to API if not in localStorage or ID mismatch
-            // If the user says "don't get course from backend", we could skip this
-            // but for safety if someone comes from a direct link we try to load it.
             this.course = await CourseService.getCourse(this.courseId);
             this.renderCourseInfo();
         } catch (error) {
@@ -70,11 +68,9 @@ class ApplyController {
         const infoEl = document.getElementById('courseInfo');
         if (!infoEl || !this.course) return;
 
-        // The object from localStorage might have different property names if it was serialized directly from a Course instance or from raw data
         const name = this.course.name || '';
-        const teacherName = this.course.teacherName || this.course.instructorName || '';
+        const teacherName = this.course.teacherName || '';
         const startDate = this.course.startDate || '';
-        const seatsLeft = this.course.seatsLeft !== undefined ? this.course.seatsLeft : 0;
         const type = this.course.type || 'free';
         const price = this.course.price || 0;
 
@@ -83,7 +79,6 @@ class ApplyController {
             <div class="meta">
                 <span>👨‍🏫 ${teacherName}</span>
                 <span>📅 ${UtilsService.formatDate(startDate)}</span>
-                <span>🪑 ${seatsLeft} مقعد متبقي</span>
                 <span style="color:${type === 'free' ? 'var(--success)' : 'var(--orange)'}; font-weight: 700;">
                     ${type === 'free' ? '🆓 مجانية' : UtilsService.formatPrice(price)}
                 </span>

@@ -126,8 +126,8 @@ class MainController {
     renderStats() {
         const stats = {
             total: this.pagination.total || this.courses.length,
-            open: this.courses.filter(c => c.seatsLeft > 0).length,
-            full: this.courses.filter(c => c.seatsLeft === 0).length,
+            open: this.courses.filter(c => !c.isCompleted()).length,
+            completed: this.courses.filter(c => c.isCompleted()).length,
             free: this.courses.filter(c => c.type === 'free').length
         };
 
